@@ -1,0 +1,16 @@
+[project]
+title = DefDraw
+dependencies = 
+
+[library]
+include_dirs = defstring
+
+[input]
+game_binding = /example/main.input_bindingc
+
+[bootstrap]
+main_collection = /example/main.collectionc
+
+[physics]
+type = 3D
+
