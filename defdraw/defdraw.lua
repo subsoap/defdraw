@@ -55,9 +55,30 @@ end
 function M.clear_surface(surface, color, alpha)
 end
 
+-- Clear a surface to a color and alpha
+function M.clear_surface_hex(surface, color, alpha)
+	--[[
+	M.set_color_hex(color)
+	M.color_a = alpha
+	for i=0, surface.width, 1 do
+		for j=0, surface.height, 1 do
+			M.draw_point(surface, i, j)
+		end
+	end
+	--]]
+	surface.buffer = buffer.create(surface.width * surface.height, { {name=hash("rgba"), type=buffer.VALUE_TYPE_UINT8, count=4} } )
+	surface.stream = buffer.get_stream(surface.buffer, hash("rgba"))
+	resource.set_texture(surface.resource_path,surface.header,surface.buffer)
+end
+
 -- Shortcut for clear_surface
 function  M.cls(surface, color, alpha)
 	M.clear_surface(surface, color, alpha)
+end
+
+-- Shortcut for clear_surface
+function  M.cls_hex(surface, color, alpha)
+	M.clear_surface_hex(surface, color, alpha)
 end
 
 -- Sets the draw color
