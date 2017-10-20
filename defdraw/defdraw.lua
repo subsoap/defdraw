@@ -7,7 +7,15 @@ M.color_b = 255
 M.color_a = 1
 M.color = vmath.vector4(255, 255, 255, 1)
 
-
+-- Converts a hex color to RGB values
+function M.hex2rgb(hex)
+    hex = hex:gsub("#","")
+    if(string.len(hex) == 3) then
+        return tonumber("0x"..hex:sub(1,1)) * 17, tonumber("0x"..hex:sub(2,2)) * 17, tonumber("0x"..hex:sub(3,3)) * 17
+    elseif(string.len(hex) == 6) then
+        return tonumber("0x"..hex:sub(1,2)), tonumber("0x"..hex:sub(3,4)), tonumber("0x"..hex:sub(5,6))
+    end
+end
 
 -- Create new surface to draw on
 -- The atlas you use must be large enough to fit width and height
@@ -68,6 +76,14 @@ end
 
 -- Sets the draw color based on a hex value as a string
 function M.set_color_hex(hex)
+	local r,g,b = M.hex2rgb(hex)
+	M.color.x = r
+	M.color.y = g
+	M.color.z = b
+	M.color_r = r
+	M.color_g = g
+	M.color_b = b
+
 end
 
 -- Sets the color based on hue shift of old color by an amount (negative or positive)

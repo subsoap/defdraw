@@ -19,24 +19,29 @@ function init(self)
 	self.counter = 0
 	
 	self.surface = defdraw.create_surface("/surface#sprite", 1024,1024, 960, 640)
-	pprint(self.surface)
+	--pprint(self.surface)
 	
-	defdraw.color_r = 255
-	defdraw.color_a = 1
+	
+	defdraw.set_color_hex("#ff7800")
 end
 
 
 function update(self, dt)
 
-	for i=0,1000,1 do
+	--[
+	for i=0,100,1 do
 		self.timer = self.timer + 3
-		if self.timer >= 960 then
+		if self.timer >= 400 then
 			self.timer = 0
 			self.counter = self.counter + 1
 		end
 		defdraw.color_a = self.counter / 640
-		defdraw.draw_point(self.surface,math.floor(self.timer + math.cos(self.counter)),math.floor(self.counter+ math.sin(self.timer)*100))
+		--defdraw.draw_point(self.surface,math.floor(self.timer + math.cos(self.counter)),math.floor(self.counter+ math.sin(self.timer)*100))
 	end
+	
+	defdraw.draw_point(self.surface,self.timer+200,self.counter)
+	
+	--]]
 	--print(self.counter)
 	--defdraw.draw_point(self.surface,self.timer,630)
 	
