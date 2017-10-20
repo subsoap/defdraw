@@ -4,8 +4,8 @@ local M = {}
 M.color_r = 255
 M.color_g = 255
 M.color_b = 255
-M.color_a = 255
-M.color = vmath.vector4(255, 255, 255, 255)
+M.color_a = 1
+M.color = vmath.vector4(255, 255, 255, 1)
 
 
 
@@ -100,9 +100,9 @@ function M.draw_point(surface,x,y)
 	
 	local index = (y * surface.width * 4) + (x * 4) + 1
 	--print(index)
-	surface.stream[index + 0] = M.color_r
-	surface.stream[index + 1] = M.color_g
-	surface.stream[index + 2] = M.color_b
+	surface.stream[index + 0] = M.color_r * M.color_a
+	surface.stream[index + 1] = M.color_g * M.color_a
+	surface.stream[index + 2] = M.color_b * M.color_a
 	surface.stream[index + 3] = M.color_a or 0xff
 	
 	surface.dirty = true
